@@ -708,6 +708,9 @@ body{font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;background:
 .hdr{position:fixed;top:0;left:0;right:0;height:68px;background:#fff;border-bottom:1px solid var(--border-subtle);
   display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:200;
   box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.hdr-logo-wrap{display:flex;align-items:center;flex-shrink:0;
+  padding-right:16px;margin-right:16px;border-right:1px solid var(--border-subtle)}
+.hdr-logo{height:44px;width:auto;display:block}
 .hdr-left{flex:1}
 .hdr-title{font-size:14px;font-weight:700;color:var(--brand);letter-spacing:.3px}
 .hdr-sub{font-size:11px;color:var(--ink-muted);margin-top:1px}
@@ -831,6 +834,9 @@ tbody tr:last-child td{border-bottom:none}
 <body>
 
 <header class="hdr">
+  <div class="hdr-logo-wrap">
+    <img src="Logo_PMA.png" alt="Prefeitura Municipal de Arapiraca" class="hdr-logo">
+  </div>
   <div class="hdr-left">
     <div class="hdr-title">Secretaria Municipal de Saúde de Arapiraca</div>
     <div class="hdr-sub">Painel Epidemiológico — Doença Diarreica Aguda (CID A09) — Arapiraca/AL — 2025</div>
