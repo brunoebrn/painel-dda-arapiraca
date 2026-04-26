@@ -32,6 +32,3 @@ __pycache__/
 .vscode/
 .idea/
 *.swp
-# ─── Arquivos temporários do pipeline (intermediários, não versionar) ─────────
-*.parquet
-*.log
