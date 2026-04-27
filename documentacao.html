@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentação — Painel DDA Arapiraca 2025</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Arial, sans-serif;
+    background: #FAFBFC; color: #1C2B3A; line-height: 1.65;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 32px 24px 80px; }
+  header {
+    border-bottom: 3px solid #1B4F72;
+    padding-bottom: 18px; margin-bottom: 28px;
+  }
+  header img { height: 60px; margin-bottom: 14px; }
+  h1 { font-size: 1.6rem; color: #0F3A56; margin-bottom: 6px; }
+  h2 {
+    font-size: 1.15rem; color: #0F3A56;
+    margin: 32px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+  }
+  h3 { font-size: 1rem; margin: 18px 0 8px; color: #1C2B3A; }
+  p, li { font-size: 0.95rem; margin-bottom: 10px; }
+  ul, ol { margin-left: 22px; margin-bottom: 14px; }
+  li { margin-bottom: 6px; }
+  .callout {
+    background: #FFF8E1;
+    border: 1px solid #D4A017;
+    border-left: 4px solid #D4A017;
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 0.9rem;
+  }
+  .back {
+    display: inline-block; margin-bottom: 18px;
+    color: #0F3A56; text-decoration: none;
+    font-size: 0.85rem; font-weight: 600;
+  }
+  .back:hover { text-decoration: underline; }
+  .meta { color: #5D6D7E; font-size: 0.85rem; }
+  table.glossario {
+    width: 100%; border-collapse: collapse; margin: 12px 0;
+    font-size: 0.88rem;
+  }
+  table.glossario th, table.glossario td {
+    padding: 8px 10px; text-align: left;
+    border-bottom: 1px solid #D5D8DC;
+  }
+  table.glossario th {
+    background: #EAF3FB; color: #0F3A56;
+    font-weight: 600;
+  }
+  code {
+    background: #EAF3FB; padding: 1px 5px;
+    border-radius: 3px; font-size: 0.86em;
+  }
+  .footer {
+    margin-top: 48px; padding-top: 18px;
+    border-top: 1px solid rgba(0,0,0,.08);
+    color: #5D6D7E; font-size: 0.78rem; text-align: center;
+  }
+  a { color: #0F3A56; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back" href="index.html">← Voltar ao painel</a>
+
+<header>
+  <img src="Logo_PMA.png" alt="Prefeitura Municipal de Arapiraca">
+  <h1>Painel DDA Arapiraca — Documentação Técnica</h1>
+  <div class="meta">Versão 2.1 · Atualizado em 26/04/2026</div>
+</header>
+
+<h2>1. Apresentação e objetivo</h2>
+<p>
+  O Painel DDA Arapiraca é uma ferramenta pública de vigilância
+  epidemiológica focada em <strong>Doença Diarreica Aguda (CID A09)</strong>
+  no município de Arapiraca/AL. Apoia a gestão da Secretaria Municipal de
+  Saúde, o Comitê Materno-Infantil e o controle social, oferecendo análise
+  granular dos atendimentos realizados na rede de Atenção Primária em Saúde.
+</p>
+<p>
+  O painel separa explicitamente duas perspectivas territoriais:
+</p>
+<ul>
+  <li>
+    <strong>Vinculação do paciente</strong> — UBS de referência, equipe ESF,
+    microárea e bairro do cadastro do paciente. Útil para análise de cobertura
+    populacional e responsabilidade sanitária.
+  </li>
+  <li>
+    <strong>Atendimento realizado</strong> — unidade onde o atendimento
+    efetivamente ocorreu (UBS, UPA, Complexo Multiprofissional). Útil para
+    análise de fluxo, demanda assistencial e acesso.
+  </li>
+</ul>
+
+<h2>2. Origem dos dados</h2>
+<p>
+  Os dados são extraídos do <strong>e-SUS APS</strong>, sistema oficial da
+  Atenção Primária do Ministério da Saúde, a partir de três fontes:
+</p>
+<ul>
+  <li><strong>FAI</strong> — Ficha de Atendimento Individual (registro do atendimento).</li>
+  <li><strong>FCI</strong> — Ficha de Cadastro Individual (vínculo clínico longitudinal).</li>
+  <li><strong>Cadastro do Cidadão</strong> — base de cadastro com endereço e bairro.</li>
+</ul>
+<p>
+  Período coberto: <strong>janeiro a dezembro de 2025</strong>. Esta versão
+  contém aproximadamente <strong>5.388 atendimentos</strong> com CID A09
+  identificado, referentes a <strong>4.747 pacientes únicos</strong> após
+  deduplicação.
+</p>
+
+<h2>3. Funcionalidades</h2>
+<ul>
+  <li>
+    <strong>Visão Geral</strong> — cards principais (totais, recorrência,
+    menores de 5 anos, sem vinculação APS, fora da UBS de referência),
+    série temporal mensal, distribuições por sexo, faixa etária e zona.
+  </li>
+  <li>
+    <strong>Análise Territorial</strong> — tabelas de UBS de referência,
+    bairros e equipes mais envolvidas no atendimento de DDA.
+  </li>
+  <li>
+    <strong>Perfil Epidemiológico</strong> — distribuição cruzada faixa × sexo,
+    histograma de recorrência por paciente, e flags clínicos do cadastro
+    (gestantes, diabéticos, hipertensos, morador de rua).
+  </li>
+  <li>
+    <strong>Mapa Territorial</strong> — choropleth dos bairros de Arapiraca
+    com intensidade proporcional ao número de atendimentos.
+  </li>
+  <li>
+    <strong>Por local de atendimento</strong> — tabelas de unidades e equipes
+    de atendimento (UPA, Complexo Multiprofissional, UBSs), gráfico por dia
+    da semana e <strong>heatmap calendário</strong> (dia da semana × dia do mês).
+  </li>
+  <li>
+    <strong>Filtros combinatórios</strong> — todos os filtros (zona, UBS,
+    bairro, faixa, sexo, mês, dia da semana, marcadores rápidos) se aplicam
+    simultaneamente sobre o conjunto de registros.
+  </li>
+  <li>
+    <strong>Exportação CSV</strong> com cabeçalho contextual (filtros aplicados,
+    totais e aviso LGPD).
+  </li>
+</ul>
+
+<h2>4. Metodologia de anonimização</h2>
+<p>
+  A base utilizada pelo painel é gerada por pipeline de anonimização
+  específico, que aplica:
+</p>
+<ul>
+  <li>
+    <strong>Hash determinístico SHA-256 com sal local</strong> sobre o CNS do
+    paciente, gerando um identificador artificial de 12 caracteres
+    (<code>paciente_id</code>). O sal nunca é versionado nem exposto, e
+    permanece em arquivo local sob controle do mantenedor.
+  </li>
+  <li>
+    <strong>Remoção integral de PII direta</strong>: nome, CPF, nome da mãe,
+    nome do pai, logradouro, número, complemento e ponto de referência são
+    eliminados. O painel nunca exibe ou exporta esses campos.
+  </li>
+  <li>
+    <strong>Granularidade preservada</strong> para análise: data de
+    nascimento (AAAAMMDD), CEP, bairro, UBS, microárea, equipe (INE/CNES) e
+    data do atendimento. Esses campos são compatíveis com o nível de detalhe
+    de bases públicas do Ministério da Saúde.
+  </li>
+  <li>
+    <strong>Deduplicação prévia (record linkage)</strong>: registros do mesmo
+    paciente que apareciam em fichas diferentes (FAI, FCI, Cadastro) são
+    fundidos por hard match (CNS/CPF cruzados) e soft match estrito
+    (nome ≥ 0,92 + nome da mãe ≥ 0,85 + data de nascimento exata). A versão
+    atual identificou 4.747 pacientes únicos a partir de 14.523 registros
+    originais.
+  </li>
+  <li>
+    <strong>CNS profissional preservado</strong> (sem hash). Trata-se de
+    informação pública do Ministério da Saúde sobre agente do Estado, útil
+    para análises de produção assistencial.
+  </li>
+</ul>
+
+<div class="callout">
+  <strong>Aviso LGPD:</strong> ainda que sem PII direta, a granularidade
+  espacial (CEP + microárea) e temporal (data de nascimento) pode permitir
+  reidentificação em zonas pouco populosas, especialmente rurais. O uso
+  desta base e suas exportações deve restringir-se a finalidades sanitárias
+  e gestão pública, conforme art. 7º da Lei nº 13.709/2018 (LGPD).
+</div>
+
+<h2>5. Comparação com bases públicas do Ministério da Saúde</h2>
+<p>
+  O painel adota práticas <strong>compatíveis com o padrão DataSUS/OpenDataSUS</strong>,
+  sendo em alguns pontos mais conservador:
+</p>
+<ul>
+  <li>
+    Mais conservador: hash do CNS (bases nacionais nem expõem CNS), remoção
+    de logradouro/número.
+  </li>
+  <li>
+    Mais granular: CEP completo e microárea (DataSUS nacional só agrega por
+    município). Essa granularidade extra é justificada pelo escopo
+    municipal e gestão local da APS.
+  </li>
+</ul>
+
+<h2>6. Limitações conhecidas</h2>
+<ul>
+  <li>
+    A categoria <em>Sem vinculação APS</em> reflete apenas pacientes cujo
+    cadastro não pôde ser localizado nas fichas FCI/Cadastro. Pode incluir
+    moradores recém-chegados, pessoas em situação de rua e cadastros
+    incompletos.
+  </li>
+  <li>
+    A heurística <em>Fora da UBS de referência</em> compara nome literal das
+    unidades. Em casos de UBSs com nomenclatura inconsistente, pode haver
+    falsos positivos.
+  </li>
+  <li>
+    A classificação Urbana/Rural é feita por palavras-chave; uma versão
+    futura usará mapeamento oficial da SMS.
+  </li>
+  <li>
+    O e-SUS APS atual permite apenas categorias M/F para sexo, sem campo
+    para identidade de gênero. Esta limitação é da fonte, não do painel.
+  </li>
+</ul>
+
+<h2>7. Glossário</h2>
+<table class="glossario">
+  <thead>
+    <tr><th>Termo</th><th>Significado</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>DDA</td><td>Doença Diarreica Aguda</td></tr>
+    <tr><td>CID A09</td><td>Diarreia e gastroenterite de origem infecciosa presumida</td></tr>
+    <tr><td>APS</td><td>Atenção Primária à Saúde</td></tr>
+    <tr><td>UBS</td><td>Unidade Básica de Saúde</td></tr>
+    <tr><td>UPA</td><td>Unidade de Pronto Atendimento</td></tr>
+    <tr><td>ESF</td><td>Estratégia Saúde da Família</td></tr>
+    <tr><td>e-SUS APS</td><td>Sistema oficial de informação da Atenção Primária do MS</td></tr>
+    <tr><td>FAI</td><td>Ficha de Atendimento Individual (e-SUS APS)</td></tr>
+    <tr><td>FCI</td><td>Ficha de Cadastro Individual (e-SUS APS)</td></tr>
+    <tr><td>CNS</td><td>Cartão Nacional de Saúde</td></tr>
+    <tr><td>CNES</td><td>Cadastro Nacional de Estabelecimentos de Saúde</td></tr>
+    <tr><td>INE</td><td>Identificador Nacional de Equipe</td></tr>
+    <tr><td>Microárea</td><td>Subdivisão da área de cobertura de uma equipe ESF</td></tr>
+    <tr><td>Vinculação APS</td><td>Cadastro do paciente em uma UBS de referência</td></tr>
+    <tr><td>Recorrente</td><td>Paciente com 2 ou mais atendimentos no período</td></tr>
+  </tbody>
+</table>
+
+<h2>8. Auditabilidade</h2>
+<p>
+  Os dados anonimizados que alimentam o painel estão disponíveis em
+  <code>casos_anonimizados.json</code> (formato web) e podem ser exportados
+  via botão <em>Exportar CSV</em> respeitando os filtros ativos. Qualquer
+  pessoa pode reproduzir as agregações exibidas usando ferramentas comuns
+  (Excel, Python, R) sobre o CSV exportado.
+</p>
+
+<h2>9. Equipe técnica e contato</h2>
+<p>
+  <strong>Mantenedor técnico:</strong> Dr. Bruno Eduardo Bastos Rolim Nunes —
+  CRM 10.089/AL.<br>
+  <strong>Contexto institucional:</strong> SMS Arapiraca · Comitê Materno-Infantil.<br>
+  <strong>Repositório do código:</strong>
+  <a href="https://github.com/brunoebrn/painel-dda-arapiraca" target="_blank" rel="noopener">
+    github.com/brunoebrn/painel-dda-arapiraca
+  </a>
+</p>
+
+<div class="footer">
+  Painel DDA Arapiraca 2025 · v2.1 · Código aberto sob licença pública.
+</div>
+
+</div>
+</body>
+</html>

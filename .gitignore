@@ -1,34 +1,107 @@
-# ─── Dados originais com identificadores de pacientes ─────────────────────────
-# Exportações brutas do e-SUS — NUNCA versionar (LGPD)
+# ============================================================================
+# Painel DDA Arapiraca - .gitignore
+#
+# REGRA DE OURO:
+#   - Bruto com PII -> NUNCA versionar (xlsx, salt, dedup PII)
+#   - Base anonimizada -> vai ao git APENAS na raiz (JSON + CSV de auditoria)
+#   - Pipeline interno em v2/ -> versionar so o codigo (.py + .md), nao os dados
+#   - Memoria interna -> fora do git
+#
+# NOTA: ordem importa em .gitignore. Regras posteriores sobrescrevem
+# anteriores. Bloqueios especificos vem ANTES de qualquer negacao ampla.
+# ============================================================================
+
+# --- DADOS BRUTOS DO E-SUS (LGPD - NUNCA versionar) ---
 *.xlsx
 *.xls
-*.csv
 
-# Dados intermediários com registros individuais
+# --- SAL DA ANONIMIZACAO (CRITICO) ---
+_internal_cache.py
+**/_internal_cache.py
+
+# --- DEDUPLICACAO (PII no processo) ---
+dedup_overrides.csv
+dedup_duvidas.csv
+**/dedup_overrides.csv
+**/dedup_duvidas.csv
+
+# --- DADOS DO PIPELINE EM v2/ (apenas a copia da raiz e publicada) ---
+v2/casos_anonimizados.json
+v2/casos_anonimizados.csv
+v2/casos_anonimizados.parquet
+v2/relatorio_anonimizacao.txt
+v2/dedup_relatorio.txt
+
+# --- ARTEFATOS INTERNOS DE DESENVOLVIMENTO ---
+v2/run.log
+v2/_run.sh
+v2/_preprocess.py
+v2/build_dashboard_v2.py
+v2/dashboard_v2_app.js
+
+# --- ARTEFATOS V1 OBSOLETOS ---
+build_dashboard.py
+build_dashboard2.py
+build_data_v3.py
+data_pipeline.py
+data_pipeline_fast.py
+dashboard_data.json
+dashboard_data_current.json
+dashboard_data_v3.json
+
+# --- BASES INTERMEDIARIAS DO PIPELINE ---
 merged_slim.csv
 merged*.csv
 
-# ─── Dados de versões anteriores (substituídos por v3) ────────────────────────
-dashboard_data.json
-dashboard_data_current.json
+# --- MEMORIA INTERNA (entre sessoes, fica so no OneDrive) ---
+.projeto-memoria.md
 
-# Scripts de pipeline anteriores (substituídos por build_data_v3.py)
-data_pipeline.py
-data_pipeline_fast.py
-build_dashboard.py
-
-# ─── Sistema operacional ──────────────────────────────────────────────────────
+# --- SISTEMA OPERACIONAL ---
 .DS_Store
 Thumbs.db
 desktop.ini
+.test-perm
 
-# ─── Python ──────────────────────────────────────────────────────────────────
+# --- PYTHON ---
 __pycache__/
+**/__pycache__/
 *.pyc
 *.pyo
 .env
+.venv/
+venv/
 
-# ─── Editor ──────────────────────────────────────────────────────────────────
+# --- EDITOR / IDE ---
 .vscode/
 .idea/
 *.swp
+*~
+
+# --- REGRA AMPLA DE CSV (com negacao para o publico da raiz) ---
+# Bloqueia qualquer CSV nao listado acima.
+*.csv
+# Permite SOMENTE o CSV anonimizado da raiz (auditoria publica).
+!casos_anonimizados.csv
+# Re-bloqueia o CSV em v2/ (apenas a copia da raiz e publicada).
+v2/casos_anonimizados.csv
+
+# ============================================================================
+# RESUMO DO QUE VAI PARA O GITHUB:
+#
+#   Frontend publico (raiz):
+#     - index.html, documentacao.html
+#     - dashboard_v2_app.js, dashboard_v2_styles.css
+#     - Logo_PMA.png, favicon.png, arapiraca_bairros.json
+#     - README.md
+#
+#   Base anonimizada para o painel + auditoria publica (raiz):
+#     - casos_anonimizados.json   (consumida pelo painel via fetch)
+#     - casos_anonimizados.csv    (auditoria publica / download direto)
+#
+#   Pipeline (versionado para reprodutibilidade do codigo):
+#     - v2/anonimizador.py, v2/dedup.py, v2/build_v2.py
+#     - v2/schema.md
+#     - v2/_internal_cache.example.py (template, sem o token real)
+#
+# Tudo o mais fica fora do repositorio.
+# ============================================================================
