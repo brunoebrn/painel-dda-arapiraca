@@ -1,25 +1,46 @@
 /* Painel DDA Arapiraca v2.1 — estilos principais
- * Paleta institucional original (PMA / v1):
- *   azul institucional, dourado accent, fundo claro neutro.
+ * Paleta extraída da Logo PMA real (#086098 azul, #F2A93B dourado).
+ * Critério: legibilidade em série temporal + identidade institucional.
+ * Estratégia de profundidade: borders-only com sombra ultra-suave
+ * (interface técnica institucional, não aplicativo lúdico).
  */
 :root {
-  --primary: #1B4F72;        /* azul institucional escuro */
-  --primary-dark: #0F3A56;   /* azul mais escuro p/ hover */
-  --primary-medium: #2E86C1; /* azul médio (gráficos) */
-  --primary-soft: #EAF3FB;   /* azul muito claro p/ hover */
-  --accent: #D4A017;         /* dourado institucional */
-  --accent-soft: #FDF5E0;    /* dourado pastel */
-  --bg: #FAFBFC;             /* fundo neutro claro */
+  /* Azuis — direto da logo */
+  --primary: #086098;        /* azul institucional principal (logo) */
+  --primary-dark: #054973;   /* hover de botões primários */
+  --primary-medium: #0E7BC4; /* azul-cidade da logo (gráficos default) */
+  --primary-light: #3DA3D9;  /* tom claro p/ datasets secundários */
+  --primary-softer: #B8DCEE; /* azul muito claro p/ stacks/áreas */
+  --primary-soft: #E5F1F9;   /* hover de elementos */
+
+  /* Dourado — direto da logo */
+  --accent: #F2A93B;         /* dourado-laranja institucional */
+  --accent-dark: #D48A1A;    /* hover/dourado mais profundo */
+  --accent-soft: #FEF1DC;    /* fundo de banners */
+
+  /* Estrutura */
+  --bg: #F7F9FB;             /* canvas levemente azulado (papel oficial) */
   --panel: #FFFFFF;
-  --border: #D5D8DC;         /* cinza discreto */
-  --text: #1C2B3A;           /* texto azul-escuro */
-  --muted: #5D6D7E;          /* texto secundário */
-  --success: #1E8449;        /* verde p/ números positivos */
-  --danger: #C0392B;         /* vermelho p/ atenção */
-  --warn-bg: #FFF8E1;        /* amarelo claro do banner */
-  --warn-border: #D4A017;    /* borda do banner = dourado */
-  --shadow: 0 2px 8px rgba(0,0,0,.06);
+  --border: #DDE5EC;         /* borda azulada discreta */
+  --border-soft: #ECF1F5;    /* separação ainda mais leve */
+
+  /* Texto (4 níveis hierárquicos) */
+  --text: #0F2942;           /* primário — azul-marinho profundo */
+  --text-secondary: #3A546B; /* secundário */
+  --muted: #5C7287;          /* terciário (metadados) */
+  --muted-soft: #94A3B0;     /* placeholder/disabled */
+
+  /* Semânticas */
+  --success: #1E8449;
+  --danger: #C0392B;
+  --warn-bg: #FEF6E1;
+  --warn-border: #F2A93B;
+
+  /* Profundidade — borders-only com sombra apenas para float */
+  --shadow: 0 1px 2px rgba(8,96,152,.04), 0 1px 3px rgba(8,96,152,.03);
+  --shadow-lift: 0 4px 12px rgba(8,96,152,.10);
   --radius: 8px;
+  --radius-sm: 6px;
 }
 
 * { box-sizing: border-box; }
@@ -113,7 +134,7 @@ button { font-family: inherit; cursor: pointer; }
   width: 100%;
   text-align: left;
 }
-.nav-link:hover { background: #EAF3FB; }
+.nav-link:hover { background: var(--primary-soft); }
 .nav-link.active {
   background: var(--primary);
   color: #fff;
@@ -134,12 +155,12 @@ button { font-family: inherit; cursor: pointer; }
   border: 1px solid var(--border);
   background: #fff;
 }
-.toggle-rapido:hover { background: #F0F3F5; }
+.toggle-rapido:hover { background: var(--border-soft); }
 .toggle-rapido input[type="checkbox"] {
   margin: 0; cursor: pointer; accent-color: var(--primary);
 }
 .toggle-rapido.active {
-  background: #EAF3FB;
+  background: var(--primary-soft);
   border-color: var(--primary);
   color: var(--primary-dark);
   font-weight: 600;
@@ -279,7 +300,7 @@ button { font-family: inherit; cursor: pointer; }
   display: flex; gap: 4px;
   padding: 4px 6px;
   border-bottom: 1px solid var(--border);
-  background: #FAFBFC;
+  background: var(--bg);
 }
 .multiselect .ms-actions button {
   flex: 1;
@@ -299,7 +320,7 @@ button { font-family: inherit; cursor: pointer; }
   cursor: pointer;
   user-select: none;
 }
-.multiselect .ms-option:hover { background: #F0F3F5; }
+.multiselect .ms-option:hover { background: var(--border-soft); }
 .multiselect .ms-option input { accent-color: var(--primary); }
 .multiselect .ms-summary {
   font-size: 0.72rem;
@@ -382,14 +403,14 @@ button { font-family: inherit; cursor: pointer; }
   border-bottom: 1px solid var(--border);
 }
 .tbl th {
-  background: #F0F3F5;
+  background: var(--border-soft);
   color: var(--primary-dark);
   font-weight: 600;
   text-transform: uppercase;
   font-size: 0.74rem;
   letter-spacing: 0.4px;
 }
-.tbl tr:hover td { background: #F8FAFC; }
+.tbl tr:hover td { background: var(--primary-soft); }
 .tbl-wrap { max-height: 360px; overflow-y: auto; }
 
 /* ─── PÁGINAS ─── */
@@ -433,7 +454,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 .heatmap-legend .gradient {
   width: 140px; height: 10px;
-  background: linear-gradient(to right, #F0F3F5, #1B4F72);
+  background: linear-gradient(to right, #FFFFFF, var(--primary));
   border: 1px solid var(--border);
   border-radius: 2px;
 }

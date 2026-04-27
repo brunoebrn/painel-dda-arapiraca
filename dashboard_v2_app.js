@@ -565,13 +565,12 @@ function renderHeatmap() {
 }
 
 function corHeatmap(v, max) {
-  if (!max || v === 0) return '#F0F3F5';
+  if (!max || v === 0) return '#FFFFFF';
   const t = v / max;
-  // Interpola entre cinza claro (#F0F3F5 = 240,243,245)
-  // e azul institucional escuro (#1B4F72 = 27,79,114)
-  const r = Math.round(240 + (27 - 240) * t);
-  const g = Math.round(243 + (79 - 243) * t);
-  const b = Math.round(245 + (114 - 245) * t);
+  // Interpola entre branco e azul institucional da logo (#086098 = 8,96,152)
+  const r = Math.round(255 + (8 - 255) * t);
+  const g = Math.round(255 + (96 - 255) * t);
+  const b = Math.round(255 + (152 - 255) * t);
   return 'rgb(' + r + ',' + g + ',' + b + ')';
 }
 
@@ -604,7 +603,7 @@ function drawBarChart(canvasId, labels, data, titulo) {
   destroyChart(canvasId);
   window.CHARTS[canvasId] = new Chart(cv, {
     type: 'bar',
-    data: { labels: labels, datasets: [{ label: titulo, data: data, backgroundColor: '#2E86C1' }] },
+    data: { labels: labels, datasets: [{ label: titulo, data: data, backgroundColor: '#0E7BC4', borderRadius: 4 }] },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false }, title: { display: false } },
@@ -617,7 +616,9 @@ function drawDoughnut(canvasId, labels, data) {
   const cv = document.getElementById(canvasId);
   if (!cv || typeof Chart === 'undefined') return;
   destroyChart(canvasId);
-  const cores = ['#2E86C1','#D4A017','#1E8449','#C0392B','#5DADE2','#85C1E9'];
+  // Paleta institucional progressiva: azul-cidade primário,
+  // dourado-logo accent, semânticas e tons de azul claros para séries longas.
+  const cores = ['#0E7BC4','#F2A93B','#1E8449','#C0392B','#3DA3D9','#B8DCEE'];
   window.CHARTS[canvasId] = new Chart(cv, {
     type: 'doughnut',
     data: { labels: labels, datasets: [{ data: data, backgroundColor: cores.slice(0, labels.length) }] },
@@ -634,8 +635,8 @@ function drawStackedBar(canvasId, labels, dataM, dataF) {
     data: {
       labels: labels,
       datasets: [
-        { label: 'Masculino', data: dataM, backgroundColor: '#2E86C1' },
-        { label: 'Feminino', data: dataF, backgroundColor: '#D4A017' }
+        { label: 'Masculino', data: dataM, backgroundColor: '#0E7BC4', borderRadius: 4 },
+        { label: 'Feminino', data: dataF, backgroundColor: '#F2A93B', borderRadius: 4 }
       ]
     },
     options: {
@@ -677,12 +678,12 @@ function renderMapa(regs) {
   let max = 0;
   Object.values(porBairro).forEach(v => { if (v > max) max = v; });
   function corBairro(v) {
-    if (!v || !max) return '#F0F3F5';
+    if (!v || !max) return '#F7F9FB';
     const t = v / max;
-    // mesma escala do heatmap: cinza claro → azul institucional escuro
-    const r = Math.round(240 + (27 - 240) * t);
-    const g = Math.round(243 + (79 - 243) * t);
-    const b = Math.round(245 + (114 - 245) * t);
+    // mesma escala do heatmap: branco → azul institucional da logo
+    const r = Math.round(255 + (8 - 255) * t);
+    const g = Math.round(255 + (96 - 255) * t);
+    const b = Math.round(255 + (152 - 255) * t);
     return 'rgb(' + r + ',' + g + ',' + b + ')';
   }
   function nomeBairroGeo(feat) {
